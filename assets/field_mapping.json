@@ -1,0 +1,664 @@
+{
+  "description": "数据字段到业务指标的映射配置",
+  "version": "1.0",
+  "mapping_strategy": {
+    "priority": [
+      "exact_match",
+      "fuzzy_match",
+      "inference"
+    ],
+    "fuzzy_threshold": 0.6,
+    "inference_rules": [
+      {
+        "condition": "字段名包含 'user' 或 'customer' 或 'member'",
+        "inference": "用户相关指标",
+        "examples": ["user_id", "customer_id", "member_id"]
+      },
+      {
+        "condition": "字段名包含 'pay' 或 'price' 或 'amount' 或 'cost'",
+        "inference": "交易相关指标",
+        "examples": ["pay_amount", "price", "cost"]
+      },
+      {
+        "condition": "字段名包含 'order' 或 'sale' 或 'sales'",
+        "inference": "订单/销售相关指标",
+        "examples": ["order_id", "sale_amount", "sales_count"]
+      },
+      {
+        "condition": "字段名包含 'date' 或 'time' 或 'day' 或 'month'",
+        "inference": "时间相关指标",
+        "examples": ["order_date", "create_time", "day"]
+      },
+      {
+        "condition": "字段名包含 'product' 或 'item' 或 'sku'",
+        "inference": "商品相关指标",
+        "examples": ["product_id", "item_id", "sku"]
+      },
+      {
+        "condition": "字段名包含 'stock' 或 'inventory' 或 'warehouse'",
+        "inference": "库存相关指标",
+        "examples": ["stock_qty", "inventory_count", "warehouse_id"]
+      },
+      {
+        "condition": "字段名包含 'rate' 或 'ratio' 或 'percent' 或 '%'",
+        "inference": "比率相关指标",
+        "examples": ["conversion_rate", "growth_ratio", "profit_percent"]
+      },
+      {
+        "condition": "字段名包含 'score' 或 'grade' 或 'level'",
+        "inference": "评分/等级相关指标",
+        "examples": ["user_score", "grade", "level"]
+      }
+    ]
+  },
+  "field_mapping": {
+    "user_id": {
+      "business_metric": "用户ID",
+      "metric_type": "用户相关",
+      "data_type": "标识符",
+      "description": "用户唯一标识符",
+      "examples": ["user_id", "customer_id", "member_id", "uid", "user_pk"]
+    },
+    "user_name": {
+      "business_metric": "用户姓名",
+      "metric_type": "用户相关",
+      "data_type": "文本",
+      "description": "用户姓名",
+      "examples": ["user_name", "customer_name", "member_name"]
+    },
+    "user_age": {
+      "business_metric": "用户年龄",
+      "metric_type": "用户相关",
+      "data_type": "数值",
+      "description": "用户年龄",
+      "examples": ["user_age", "age", "customer_age"]
+    },
+    "user_gender": {
+      "business_metric": "用户性别",
+      "metric_type": "用户相关",
+      "data_type": "分类",
+      "description": "用户性别",
+      "examples": ["user_gender", "gender", "sex"]
+    },
+    "user_level": {
+      "business_metric": "用户等级",
+      "metric_type": "用户相关",
+      "data_type": "分类",
+      "description": "用户等级",
+      "examples": ["user_level", "member_level", "vip_level"]
+    },
+    "user_source": {
+      "business_metric": "用户来源",
+      "metric_type": "用户相关",
+      "data_type": "分类",
+      "description": "用户来源渠道",
+      "examples": ["user_source", "channel", "source_channel"]
+    },
+    "user_register_date": {
+      "business_metric": "用户注册时间",
+      "metric_type": "用户相关",
+      "data_type": "时间",
+      "description": "用户注册时间",
+      "examples": ["user_register_date", "register_time", "reg_date"]
+    },
+    "user_last_login": {
+      "business_metric": "用户最后登录时间",
+      "metric_type": "用户相关",
+      "data_type": "时间",
+      "description": "用户最后登录时间",
+      "examples": ["user_last_login", "last_login_time", "last_active"]
+    },
+    "user_login_count": {
+      "business_metric": "用户登录次数",
+      "metric_type": "用户相关",
+      "data_type": "数值",
+      "description": "用户登录次数",
+      "examples": ["user_login_count", "login_times", "login_num"]
+    },
+    "user_visit_count": {
+      "business_metric": "用户访问次数",
+      "metric_type": "用户相关",
+      "data_type": "数值",
+      "description": "用户访问次数",
+      "examples": ["user_visit_count", "visit_times", "page_views"]
+    },
+    "user_stay_time": {
+      "business_metric": "用户停留时长",
+      "metric_type": "用户相关",
+      "data_type": "数值",
+      "description": "用户停留时长（秒）",
+      "examples": ["user_stay_time", "stay_duration", "session_duration"]
+    },
+    "user_consume_amount": {
+      "business_metric": "用户消费金额",
+      "metric_type": "用户相关",
+      "data_type": "数值",
+      "description": "用户累计消费金额",
+      "examples": ["user_consume_amount", "total_spent", "user_spending"]
+    },
+    "user_consume_count": {
+      "business_metric": "用户消费次数",
+      "metric_type": "用户相关",
+      "data_type": "数值",
+      "description": "用户消费次数",
+      "examples": ["user_consume_count", "order_count", "purchase_times"]
+    },
+    "user_retention": {
+      "business_metric": "用户留存率",
+      "metric_type": "用户相关",
+      "data_type": "比率",
+      "description": "用户留存率",
+      "examples": ["user_retention", "retention_rate", "stay_rate"]
+    },
+    "user_churn": {
+      "business_metric": "用户流失率",
+      "metric_type": "用户相关",
+      "data_type": "比率",
+      "description": "用户流失率",
+      "examples": ["user_churn", "churn_rate", "流失率"]
+    },
+    "user_ltv": {
+      "business_metric": "用户生命周期价值",
+      "metric_type": "用户相关",
+      "data_type": "数值",
+      "description": "用户生命周期价值",
+      "examples": ["user_ltv", "ltv", "customer_ltv"]
+    },
+    "user_score": {
+      "business_metric": "用户评分",
+      "metric_type": "用户相关",
+      "data_type": "数值",
+      "description": "用户评分",
+      "examples": ["user_score", "score", "user_rating"]
+    },
+    "user_credit": {
+      "business_metric": "用户信用分",
+      "metric_type": "用户相关",
+      "data_type": "数值",
+      "description": "用户信用分",
+      "examples": ["user_credit", "credit_score", "credit_level"]
+    },
+    "pay_amount": {
+      "business_metric": "支付金额",
+      "metric_type": "交易相关",
+      "data_type": "数值",
+      "description": "支付金额",
+      "examples": ["pay_amount", "amount", "payment_amount", "total_amount"]
+    },
+    "pay_time": {
+      "business_metric": "支付时间",
+      "metric_type": "交易相关",
+      "data_type": "时间",
+      "description": "支付时间",
+      "examples": ["pay_time", "payment_time", "pay_date"]
+    },
+    "pay_status": {
+      "business_metric": "支付状态",
+      "metric_type": "交易相关",
+      "data_type": "分类",
+      "description": "支付状态",
+      "examples": ["pay_status", "payment_status", "status"]
+    },
+    "pay_method": {
+      "business_metric": "支付方式",
+      "metric_type": "交易相关",
+      "data_type": "分类",
+      "description": "支付方式",
+      "examples": ["pay_method", "payment_method", "payment_type"]
+    },
+    "price": {
+      "business_metric": "单价",
+      "metric_type": "交易相关",
+      "data_type": "数值",
+      "description": "商品单价",
+      "examples": ["price", "unit_price", "item_price"]
+    },
+    "cost": {
+      "business_metric": "成本",
+      "metric_type": "交易相关",
+      "data_type": "数值",
+      "description": "成本金额",
+      "examples": ["cost", "total_cost", "expense"]
+    },
+    "profit": {
+      "business_metric": "利润",
+      "metric_type": "交易相关",
+      "data_type": "数值",
+      "description": "利润金额",
+      "examples": ["profit", "net_profit", "gross_profit"]
+    },
+    "discount": {
+      "business_metric": "折扣",
+      "metric_type": "交易相关",
+      "data_type": "数值",
+      "description": "折扣金额或比例",
+      "examples": ["discount", "discount_amount", "discount_rate"]
+    },
+    "order_id": {
+      "business_metric": "订单ID",
+      "metric_type": "订单相关",
+      "data_type": "标识符",
+      "description": "订单唯一标识符",
+      "examples": ["order_id", "order_no", "order_number"]
+    },
+    "order_date": {
+      "business_metric": "订单日期",
+      "metric_type": "订单相关",
+      "data_type": "时间",
+      "description": "订单日期",
+      "examples": ["order_date", "order_time", "order_create_time"]
+    },
+    "order_status": {
+      "business_metric": "订单状态",
+      "metric_type": "订单相关",
+      "data_type": "分类",
+      "description": "订单状态",
+      "examples": ["order_status", "status", "order_state"]
+    },
+    "order_count": {
+      "business_metric": "订单数量",
+      "metric_type": "订单相关",
+      "data_type": "数值",
+      "description": "订单数量",
+      "examples": ["order_count", "order_num", "orders"]
+    },
+    "order_amount": {
+      "business_metric": "订单金额",
+      "metric_type": "订单相关",
+      "data_type": "数值",
+      "description": "订单总金额",
+      "examples": ["order_amount", "order_total", "order_value"]
+    },
+    "order_discount": {
+      "business_metric": "订单折扣",
+      "metric_type": "订单相关",
+      "data_type": "数值",
+      "description": "订单折扣金额",
+      "examples": ["order_discount", "order_reduction", "coupon_amount"]
+    },
+    "order_profit": {
+      "business_metric": "订单利润",
+      "metric_type": "订单相关",
+      "data_type": "数值",
+      "description": "订单利润",
+      "examples": ["order_profit", "order_net_profit", "profit_amount"]
+    },
+    "order_items": {
+      "business_metric": "订单商品数",
+      "metric_type": "订单相关",
+      "data_type": "数值",
+      "description": "订单中商品数量",
+      "examples": ["order_items", "item_count", "sku_count"]
+    },
+    "order_shipping_time": {
+      "business_metric": "发货时间",
+      "metric_type": "订单相关",
+      "data_type": "时间",
+      "description": "订单发货时间",
+      "examples": ["order_shipping_time", "shipping_time", "dispatch_time"]
+    },
+    "order_delivery_time": {
+      "business_metric": "送达时间",
+      "metric_type": "订单相关",
+      "data_type": "时间",
+      "description": "订单送达时间",
+      "examples": ["order_delivery_time", "delivery_time", "receive_time"]
+    },
+    "product_id": {
+      "business_metric": "商品ID",
+      "metric_type": "商品相关",
+      "data_type": "标识符",
+      "description": "商品唯一标识符",
+      "examples": ["product_id", "sku_id", "item_id", "product_pk"]
+    },
+    "product_name": {
+      "business_metric": "商品名称",
+      "metric_type": "商品相关",
+      "data_type": "文本",
+      "description": "商品名称",
+      "examples": ["product_name", "sku_name", "item_name"]
+    },
+    "product_category": {
+      "business_metric": "商品分类",
+      "metric_type": "商品相关",
+      "data_type": "分类",
+      "description": "商品分类",
+      "examples": ["product_category", "category", "cat_id"]
+    },
+    "product_brand": {
+      "business_metric": "商品品牌",
+      "metric_type": "商品相关",
+      "data_type": "分类",
+      "description": "商品品牌",
+      "examples": ["product_brand", "brand", "brand_name"]
+    },
+    "product_cost": {
+      "business_metric": "商品成本",
+      "metric_type": "商品相关",
+      "data_type": "数值",
+      "description": "商品成本",
+      "examples": ["product_cost", "sku_cost", "item_cost"]
+    },
+    "product_price": {
+      "business_metric": "商品价格",
+      "metric_type": "商品相关",
+      "data_type": "数值",
+      "description": "商品价格",
+      "examples": ["product_price", "sku_price", "item_price"]
+    },
+    "product_sales": {
+      "business_metric": "商品销量",
+      "metric_type": "商品相关",
+      "data_type": "数值",
+      "description": "商品销量",
+      "examples": ["product_sales", "sales_count", "sales_volume"]
+    },
+    "product_stock": {
+      "business_metric": "商品库存",
+      "metric_type": "商品相关",
+      "data_type": "数值",
+      "description": "商品库存数量",
+      "examples": ["product_stock", "stock_qty", "inventory_qty"]
+    },
+    "product_rating": {
+      "business_metric": "商品评分",
+      "metric_type": "商品相关",
+      "data_type": "数值",
+      "description": "商品评分",
+      "examples": ["product_rating", "product_score", "item_rating"]
+    },
+    "product_review_count": {
+      "business_metric": "商品评论数",
+      "metric_type": "商品相关",
+      "data_type": "数值",
+      "description": "商品评论数量",
+      "examples": ["product_review_count", "review_count", "comment_count"]
+    },
+    "stock_qty": {
+      "business_metric": "库存数量",
+      "metric_type": "库存相关",
+      "data_type": "数值",
+      "description": "库存数量",
+      "examples": ["stock_qty", "stock", "inventory_qty", "inventory"]
+    },
+    "stock_status": {
+      "business_metric": "库存状态",
+      "metric_type": "库存相关",
+      "data_type": "分类",
+      "description": "库存状态",
+      "examples": ["stock_status", "inventory_status", "stock_level"]
+    },
+    "stock_in_time": {
+      "business_metric": "入库时间",
+      "metric_type": "库存相关",
+      "data_type": "时间",
+      "description": "商品入库时间",
+      "examples": ["stock_in_time", "in_time", "receive_time"]
+    },
+    "stock_out_time": {
+      "business_metric": "出库时间",
+      "metric_type": "库存相关",
+      "data_type": "时间",
+      "description": "商品出库时间",
+      "examples": ["stock_out_time", "out_time", "ship_time"]
+    },
+    "stock_location": {
+      "business_metric": "库存位置",
+      "metric_type": "库存相关",
+      "data_type": "分类",
+      "description": "库存位置",
+      "examples": ["stock_location", "warehouse", "location"]
+    },
+    "stock_turnover_rate": {
+      "business_metric": "库存周转率",
+      "metric_type": "库存相关",
+      "data_type": "比率",
+      "description": "库存周转率",
+      "examples": ["stock_turnover_rate", "turnover_rate", "inventory_turnover"]
+    },
+    "create_time": {
+      "business_metric": "创建时间",
+      "metric_type": "时间相关",
+      "data_type": "时间",
+      "description": "记录创建时间",
+      "examples": ["create_time", "created_at", "gmt_create"]
+    },
+    "update_time": {
+      "business_metric": "更新时间",
+      "metric_type": "时间相关",
+      "data_type": "时间",
+      "description": "记录更新时间",
+      "examples": ["update_time", "updated_at", "gmt_modified"]
+    },
+    "date": {
+      "business_metric": "日期",
+      "metric_type": "时间相关",
+      "data_type": "时间",
+      "description": "日期",
+      "examples": ["date", "day", "dt"]
+    },
+    "month": {
+      "business_metric": "月份",
+      "metric_type": "时间相关",
+      "data_type": "时间",
+      "description": "月份",
+      "examples": ["month", "month_id", "month_num"]
+    },
+    "year": {
+      "business_metric": "年份",
+      "metric_type": "时间相关",
+      "data_type": "时间",
+      "description": "年份",
+      "examples": ["year", "year_id", "year_num"]
+    },
+    "week": {
+      "business_metric": "周",
+      "metric_type": "时间相关",
+      "data_type": "时间",
+      "description": "周",
+      "examples": ["week", "week_id", "week_num"]
+    },
+    "hour": {
+      "business_metric": "小时",
+      "metric_type": "时间相关",
+      "data_type": "时间",
+      "description": "小时",
+      "examples": ["hour", "hour_id", "hour_num"]
+    },
+    "rate": {
+      "business_metric": "比率",
+      "metric_type": "比率相关",
+      "data_type": "比率",
+      "description": "比率",
+      "examples": ["rate", "ratio", "percentage"]
+    },
+    "growth_rate": {
+      "business_metric": "增长率",
+      "metric_type": "比率相关",
+      "data_type": "比率",
+      "description": "增长率",
+      "examples": ["growth_rate", "growth_ratio", "increase_rate"]
+    },
+    "conversion_rate": {
+      "business_metric": "转化率",
+      "metric_type": "比率相关",
+      "data_type": "比率",
+      "description": "转化率",
+      "examples": ["conversion_rate", "conversion_ratio", "cvr"]
+    },
+    "retention_rate": {
+      "business_metric": "留存率",
+      "metric_type": "比率相关",
+      "data_type": "比率",
+      "description": "留存率",
+      "examples": ["retention_rate", "retention_ratio", "stay_rate"]
+    },
+    "churn_rate": {
+      "business_metric": "流失率",
+      "metric_type": "比率相关",
+      "data_type": "比率",
+      "description": "流失率",
+      "examples": ["churn_rate", "churn_ratio", "流失率"]
+    },
+    "profit_rate": {
+      "business_metric": "利润率",
+      "metric_type": "比率相关",
+      "data_type": "比率",
+      "description": "利润率",
+      "examples": ["profit_rate", "profit_ratio", "margin"]
+    },
+    "score": {
+      "business_metric": "评分",
+      "metric_type": "评分相关",
+      "data_type": "数值",
+      "description": "评分",
+      "examples": ["score", "rating", "grade"]
+    },
+    "grade": {
+      "business_metric": "等级",
+      "metric_type": "评分相关",
+      "data_type": "分类",
+      "description": "等级",
+      "examples": ["grade", "level", "tier"]
+    },
+    "level": {
+      "business_metric": "等级",
+      "metric_type": "评分相关",
+      "data_type": "分类",
+      "description": "等级",
+      "examples": ["level", "tier", "rank"]
+    },
+    "status": {
+      "business_metric": "状态",
+      "metric_type": "状态相关",
+      "data_type": "分类",
+      "description": "状态",
+      "examples": ["status", "state", "condition"]
+    },
+    "name": {
+      "business_metric": "名称",
+      "metric_type": "文本相关",
+      "data_type": "文本",
+      "description": "名称",
+      "examples": ["name", "title", "label"]
+    },
+    "description": {
+      "business_metric": "描述",
+      "metric_type": "文本相关",
+      "data_type": "文本",
+      "description": "描述",
+      "examples": ["description", "desc", "content"]
+    },
+    "id": {
+      "business_metric": "ID",
+      "metric_type": "标识符相关",
+      "data_type": "标识符",
+      "description": "唯一标识符",
+      "examples": ["id", "pk", "uid"]
+    }
+  },
+  "business_metrics": {
+    "用户相关": [
+      "用户ID",
+      "用户姓名",
+      "用户年龄",
+      "用户性别",
+      "用户等级",
+      "用户来源",
+      "用户注册时间",
+      "用户最后登录时间",
+      "用户登录次数",
+      "用户访问次数",
+      "用户停留时长",
+      "用户消费金额",
+      "用户消费次数",
+      "用户留存率",
+      "用户流失率",
+      "用户生命周期价值",
+      "用户评分",
+      "用户信用分"
+    ],
+    "交易相关": [
+      "支付金额",
+      "支付时间",
+      "支付状态",
+      "支付方式",
+      "单价",
+      "成本",
+      "利润",
+      "折扣"
+    ],
+    "订单相关": [
+      "订单ID",
+      "订单日期",
+      "订单状态",
+      "订单数量",
+      "订单金额",
+      "订单折扣",
+      "订单利润",
+      "订单商品数",
+      "发货时间",
+      "送达时间"
+    ],
+    "商品相关": [
+      "商品ID",
+      "商品名称",
+      "商品分类",
+      "商品品牌",
+      "商品成本",
+      "商品价格",
+      "商品销量",
+      "商品库存",
+      "商品评分",
+      "商品评论数"
+    ],
+    "库存相关": [
+      "库存数量",
+      "库存状态",
+      "入库时间",
+      "出库时间",
+      "库存位置",
+      "库存周转率"
+    ],
+    "时间相关": [
+      "创建时间",
+      "更新时间",
+      "日期",
+      "月份",
+      "年份",
+      "周",
+      "小时"
+    ],
+    "比率相关": [
+      "比率",
+      "增长率",
+      "转化率",
+      "留存率",
+      "流失率",
+      "利润率"
+    ],
+    "评分相关": [
+      "评分",
+      "等级"
+    ],
+    "状态相关": [
+      "状态"
+    ],
+    "文本相关": [
+      "名称",
+      "描述"
+    ],
+    "标识符相关": [
+      "ID"
+    ]
+  },
+  "fuzzy_match_examples": {
+    "user_id": ["uid", "customer_id", "member_id", "user_pk"],
+    "pay_amount": ["amount", "total_amount", "payment_amount", "order_amount"],
+    "order_date": ["create_time", "order_time", "order_create_time"],
+    "product_id": ["sku_id", "item_id", "product_pk"],
+    "stock_qty": ["stock", "inventory_qty", "inventory"],
+    "conversion_rate": ["cvr", "conversion_ratio", "转化率"],
+    "retention_rate": ["retention_ratio", "stay_rate", "留存率"]
+  }
+}
